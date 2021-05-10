@@ -1,9 +1,14 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Menu } from "./components/Menu";
+import { Container } from "./components/Container";
 
 const App = () => {
-  return <>
-  </>
-}
+  return (
+    <Container>
+      <Menu />
+    </Container>
+  );
+};
 
 export default App;
