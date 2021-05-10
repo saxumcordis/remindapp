@@ -1,0 +1,17 @@
+@import "../../ui/Theme/theme";
+
+.button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  max-width: 24px;
+  max-height: 28px;
+  transition: 0.4s all;
+  @include themify {
+    fill: $color-4;
+  }
+}
