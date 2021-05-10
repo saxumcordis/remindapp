@@ -1,40 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:200');
-
-html, body {
+html,
+body {
   height: 100%;
 }
 body {
-  content: '';
-  position: absolute;
-  top: calc(-1 * var(--borderWidth));
-  left: calc(-1 * var(--borderWidth));
-  height: calc(100% + var(--borderWidth) * 2);
-  width: calc(100% + var(--borderWidth) * 2);
-  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
-  border-radius: calc(2 * var(--borderWidth));
-  z-index: -1;
-  animation: animatedgradient 3s ease alternate infinite;
-  background-size: 300% 300%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  margin: 0;
 }
 
-.gradient-border {
-  --borderWidth: 3px;
-  background: #1D1F20;
-  position: relative;
-  border-radius: var(--borderWidth);
+button {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
 }
 
+* {
+  box-sizing: border-box;
 
-@keyframes animatedgradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  transition-timing-function: linear;
+  transition-duration: 80ms;
+  transition-property: color, background-color, fill;
 }
-
-
