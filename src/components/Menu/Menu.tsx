@@ -4,7 +4,6 @@ import styles from "./Menu.module.scss";
 import classNames from "classnames";
 import { OpenedMenu } from "./OpenedMenu";
 import { useHover } from "../../service/hooks/useHover";
-import { ThemeSwitcher } from "../../ui/ThemeSwitcher";
 
 export const Menu: React.FC = () => {
   const hoverRef = useRef(null);
