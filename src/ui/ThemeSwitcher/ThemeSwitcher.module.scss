@@ -10,6 +10,7 @@
 .icon {
   max-width: 24px;
   max-height: 28px;
+  min-width: 24px;
   transition: 0.4s all;
   @include themify {
     fill: $color-4;
