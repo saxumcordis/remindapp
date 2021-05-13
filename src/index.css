@@ -23,3 +23,8 @@ button {
   transition-duration: 80ms;
   transition-property: color, background-color, fill;
 }
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
