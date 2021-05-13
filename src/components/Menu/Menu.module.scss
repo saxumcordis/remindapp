@@ -14,8 +14,8 @@
   justify-content: center;
   @include themify {
     color: $color-4;
-    background: $color-3;
-    box-shadow: 0 0 5px 3px $color-0;
+    background: $color-2;
+    box-shadow: 0 0 5px 3px $color-4;
   }
   &Hovered {
     width: 100px;
