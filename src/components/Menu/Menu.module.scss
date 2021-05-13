@@ -1,7 +1,9 @@
 @import "../../ui/Theme/theme";
 
 .container {
-  position: relative;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
   display: flex;
   width: 30px;
   height: 30px;
