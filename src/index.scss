@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Proxima+Nova");
+@import "./src/assets/style/mixins/_typography.scss";
+
 html,
 body {
   height: 100%;
@@ -14,6 +17,8 @@ button {
   margin: 0;
   padding: 0;
   background: none;
+  @include centering-flex;
+  outline: none;
 }
 
 * {
@@ -22,6 +27,7 @@ button {
   transition-timing-function: linear;
   transition-duration: 80ms;
   transition-property: color, background-color, fill;
+  font-family: "proxima-nova", sans-serif;
 }
 
 a {
