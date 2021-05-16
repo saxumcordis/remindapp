@@ -15,6 +15,7 @@
 }
 
 .header {
+  z-index: 1;
   @include centering-flex;
   height: 50px;
   width: 100%;
@@ -29,5 +30,15 @@
 
   @media (max-width: 768px) {
     padding: 1rem;
+  }
+}
+
+.icon {
+  max-width: 32px;
+  max-height: 32px;
+  min-width: 32px;
+  transition: 0.4s all;
+  @include themify {
+    fill: $color-4;
   }
 }
