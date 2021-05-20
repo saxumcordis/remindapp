@@ -9,17 +9,21 @@ export enum EContent {
   List,
 }
 
-export type TContent = {
+export type TContentListItem = {
   checked: boolean;
   text?: string;
 };
 
+export type TContentList = TContentListItem[];
+
+export type TContent = string | TContentList;
+
 export type TMemo = {
   id: string;
-  title?: string;
-  contentType?: EContent;
-  content?: TContent | TContent[];
+  createdTs: string;
+  title: string;
+  content?: TContent;
   priority: EMemoPriority;
   deadline?: string;
-  pinned?: boolean;
+  pinned: boolean;
 };
