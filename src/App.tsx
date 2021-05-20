@@ -5,7 +5,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Dashboard } from "./components/Dashboard";
 import { MemoPage } from "./pages/MemoPage";
 import { NotFound } from "./components/NotFound";
-import { MemoCardsContextProvider } from "./service/contexts/useMemoCards";
+import {
+  MemoCardsContextProvider,
+  PersistMemoCards,
+} from "./service/memoCards/useMemoCards";
+import { Controls } from "./components/Controls";
 
 const App = () => {
   return (
@@ -14,7 +18,9 @@ const App = () => {
         <Switch>
           <Route exact path="/">
             <MemoCardsContextProvider>
+              <Controls />
               <Dashboard />
+              <PersistMemoCards />
             </MemoCardsContextProvider>
           </Route>
           <Route path="/memo/:id" component={MemoPage} />
