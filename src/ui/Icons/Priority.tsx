@@ -1,7 +1,7 @@
 import React, { SVGProps } from "react";
 
 type PriorityProps = Omit<SVGProps<SVGSVGElement>, "viewBox"> & {
-  priority: string;
+  priority?: string;
 };
 
 export const Priority: React.FC<PriorityProps> = (props) => (
