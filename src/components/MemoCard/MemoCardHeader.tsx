@@ -27,10 +27,14 @@ export const MemoCardHeader: React.FC<MemoCardHeaderProps> = ({
   priority,
 }) => {
   const { activeMemoCard } = useMemoCards();
-  const { renameMemoCard } = useMemoCard();
+  const { renameMemoCard, pinMemoCard } = useMemoCard();
   const handleNewName = (e: React.ChangeEvent<HTMLInputElement>) => {
     renameMemoCard(e.target.value);
   };
+  const handlePinMemoCard = () => {
+    pinMemoCard(!pinned, id);
+  }
+
   return (
     <div className={styles.header}>
       <div className={styles.title}>
@@ -45,7 +49,10 @@ export const MemoCardHeader: React.FC<MemoCardHeaderProps> = ({
       <div className={styles.controls}>
         <Priority priority={priority} />
         <Deadline deadline={`deadline_${Boolean(deadline)}`} />
-        <Pinned className={pinned ? styles.pinned : ""} />
+        <Pinned
+          className={pinned ? styles.pinned : ""}
+          onClick={handlePinMemoCard}
+        />
       </div>
     </div>
   );
