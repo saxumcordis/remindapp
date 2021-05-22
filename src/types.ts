@@ -1,7 +1,7 @@
 export enum EMemoPriority {
-  Critical = "Critical",
-  Major = "Major",
-  Low = "Low",
+  Critical,
+  Major,
+  Low,
 }
 
 export enum EContent {
@@ -21,6 +21,7 @@ export type TContent = string | TContentList;
 export type TMemo = {
   id: string;
   createdTs: string;
+  modifiedTime: number;
   title: string;
   content?: TContent;
   priority: EMemoPriority;
