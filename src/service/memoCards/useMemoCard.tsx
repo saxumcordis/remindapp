@@ -6,15 +6,18 @@ import omit from "lodash/omit";
 import { NIL as NIL_UUID } from "uuid";
 import { useMemoCards } from "./useMemoCards";
 import { noop } from "../utils/noop";
+import { getMemoCardById } from "./service";
 
 type TMemoCardContext = {
   memoCard: TMemo | null;
-  renameMemoCard: (newTitle: string) => void;
+  renameMemoCard: (newTitle: string, id?: string) => void;
+  pinMemoCard: (pinned: boolean, id?: string) => void;
 };
 
 export const DEFAULT_MEMOCARD: TMemo = {
   id: NIL_UUID,
   createdTs: new Date(0).toLocaleString("en-US", { timeZone: "Europe/Moscow" }),
+  modifiedTime: new Date(0).getTime(),
   title: "New Memo",
   content: "",
   priority: EMemoPriority.Low,
@@ -25,6 +28,7 @@ export const DEFAULT_MEMOCARD: TMemo = {
 const DEFAULT_MEMOCARD_CONTEXT: TMemoCardContext = {
   memoCard: DEFAULT_MEMOCARD,
   renameMemoCard: noop,
+  pinMemoCard: noop,
 };
 
 const MemoCardContext = createContext<TMemoCardContext>(
@@ -34,7 +38,7 @@ const MemoCardContext = createContext<TMemoCardContext>(
 export const useMemoCard = () => useContext(MemoCardContext);
 
 export const MemoCardContextProvider: React.FC = ({ children }) => {
-  const { activeMemoCard, updateMemoCard } = useMemoCards();
+  const { memoCards, activeMemoCard, updateMemoCard } = useMemoCards();
   const renameMemoCard = (newTitle: string) => {
     if (activeMemoCard) {
       updateMemoCard({
@@ -43,9 +47,18 @@ export const MemoCardContextProvider: React.FC = ({ children }) => {
     }
   };
 
+  const pinMemoCard = (pinned: boolean, id?: string) => {
+    if (id) {
+      updateMemoCard({
+        ...{ ...omit(getMemoCardById(id!, memoCards), ["pinned"]), pinned },
+      });
+    }
+  };
+
   const value = {
     memoCard: activeMemoCard,
     renameMemoCard,
+    pinMemoCard,
   };
 
   return (
