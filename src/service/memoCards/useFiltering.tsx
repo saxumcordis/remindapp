@@ -3,8 +3,10 @@ import { noop } from "../utils/noop";
 
 export enum EFilter {
   createdTs = "createdTs",
+  modifiedTime = "modifiedTime",
   priority = "priority",
   deadline = "deadline",
+  title = "title",
 }
 
 export enum EFilterOrder {
