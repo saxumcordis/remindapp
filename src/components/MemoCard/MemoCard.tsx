@@ -11,6 +11,8 @@ import { useHover } from "../../service/hooks/useHover";
 import classNames from "classnames";
 import { getContentType, isValidContent } from "../../service/content/content";
 import { Link } from "react-router-dom";
+import { useFiltering } from "../../service/memoCards/useFiltering";
+import { themifyObject } from "../../ui/Priority/priority";
 
 type MemoCardProps = {
   memoCard: TMemo;
@@ -22,6 +24,8 @@ const MAX_LIST_CONTENT_LENGTH = 1;
 
 export const MemoCard: React.FC<MemoCardProps> = ({ memoCard }) => {
   const { setActiveMemoCard } = useMemoCards();
+
+  const { showPriority } = useFiltering();
 
   const [expanded, setExpanded] = useState<boolean>(false);
 
@@ -44,33 +48,36 @@ export const MemoCard: React.FC<MemoCardProps> = ({ memoCard }) => {
         Number(memoCard.content?.length) > MAX_LIST_CONTENT_LENGTH));
 
   return (
-    <MemoCardContextProvider>
-      <div
-        className={styles.memoCard}
-        onClick={handleActiveMemoCard}
-        ref={hoverRef}
-      >
-        <MemoCardHeader
-          id={memoCard.id}
-          createdTs={memoCard.createdTs}
-          title={memoCard.title}
-          pinned={memoCard.pinned}
-          deadline={memoCard.deadline}
-          priority={memoCard.priority}
-        />
-        <Link to={`memo/${memoCard.id}`}>
+    <Link to={`memo/${memoCard.id}`}>
+      <MemoCardContextProvider>
+        <div
+          className={classNames(styles.memoCard, {
+            [styles.showPriority]: showPriority,
+          })}
+          style={showPriority ? themifyObject(memoCard.priority) : undefined}
+          onClick={handleActiveMemoCard}
+          ref={hoverRef}
+        >
+          <MemoCardHeader
+            id={memoCard.id}
+            createdTs={memoCard.createdTs}
+            title={memoCard.title}
+            pinned={memoCard.pinned}
+            deadline={memoCard.deadline}
+            priority={memoCard.priority}
+          />
           <MemoCardContent content={memoCard.content} expanded={expanded} />
-        </Link>
-        {shouldShowExpander && (
-          <div
-            className={classNames(styles.footer, {
-              [styles.rotated]: expanded,
-            })}
-          >
-            {isHovered && <span onClick={handleExpanded}>▼</span>}
-          </div>
-        )}
-      </div>
-    </MemoCardContextProvider>
+          {shouldShowExpander && (
+            <div
+              className={classNames(styles.footer, {
+                [styles.rotated]: expanded,
+              })}
+            >
+              {isHovered && <span onClick={handleExpanded}>▼</span>}
+            </div>
+          )}
+        </div>
+      </MemoCardContextProvider>
+    </Link>
   );
 };
