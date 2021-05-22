@@ -5,6 +5,7 @@ import { DEFAULT_MEMOCARD } from "./useMemoCard";
 import { v4 as uuidv4 } from "uuid";
 import { noop } from "../utils/noop";
 import omit from "lodash/omit";
+import { currentDate } from "../utils/currentDate";
 
 type TMemoCardsContext = {
   memoCards: TMemo[];
@@ -29,23 +30,33 @@ export const useMemoCards = () => useContext(MemoCardsContext);
 export const MemoCardsContextProvider: React.FC = ({ children }) => {
   const memoCardsParsed =
     JSON.parse(localStorage.getItem("REMIND_APP_MEMO_CARDS") || "0") || [];
+
   const [memoCards, setMemoCards] = useState<TMemo[]>(memoCardsParsed);
 
   const [activeMemoCard, setActiveMemoCard] = useState<TMemo | null>(null);
   const addMemoCard = () => {
+    const dateNow = currentDate();
     const newMemoCard = {
-      ...omit(DEFAULT_MEMOCARD, ["id", "createdTs"]),
+      ...omit(DEFAULT_MEMOCARD, ["id", "createdTs", "modifiedTime"]),
       id: uuidv4(),
-      createdTs: new Date().toLocaleString("en-US", {
-        timeZone: "Europe/Moscow",
-      }),
+      createdTs: dateNow,
+      modifiedTime: new Date().getTime(),
     };
     setMemoCards(memoCards.concat([newMemoCard]));
     setActiveMemoCard(newMemoCard);
   };
 
   const updateMemoCard = (memoCard: TMemo) => {
-    setMemoCards(memoCards.map((e) => (e.id === memoCard.id ? memoCard : e)));
+    setMemoCards(
+      memoCards.map((e) =>
+        e.id === memoCard.id
+          ? {
+              ...omit(memoCard, ["modifiedTime"]),
+              modifiedTime: new Date().getTime(),
+            }
+          : e
+      )
+    );
   };
 
   const value = {
