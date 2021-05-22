@@ -45,11 +45,22 @@
 
   .date {
     position: absolute;
-    left: 0;
     bottom: -1px;
+    left: 0;
     font-size: 9px;
     padding-left: 0.5rem;
-    margin-top: 1px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .dateIcon {
+    margin-right: 0.2rem;
+    min-width: 10px;
+    max-width: 10px;
+    max-height: 10px;
+    @include themify {
+      fill: $color-4;
+    }
   }
 
   .inputTitle {
