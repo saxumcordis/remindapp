@@ -5,10 +5,13 @@
 }
 
 .column {
+  padding: 10px 7px 10px 7px;
+  min-width: 200px;
   &:not(:first-child) {
     padding-left: 30px;
   }
-  & > div {
-    margin-bottom: 10px;
+  & > a {
+    display: inline-block;
+    padding-bottom: 10px;
   }
 }
