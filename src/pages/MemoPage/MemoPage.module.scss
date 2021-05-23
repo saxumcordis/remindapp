@@ -1,0 +1,94 @@
+@import "../../ui/Theme/theme";
+@import "../../assets/style/mixins/_typography.scss";
+
+.header {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.date {
+  & > svg {
+    margin-right: 5px;
+  }
+}
+
+.title {
+  cursor: pointer;
+  font-size: 20px;
+  @include text-overflow(600px);
+  @include themify {
+    color: $color-3;
+  }
+
+  @media (max-width: 768px) {
+    @include text-overflow(200px);
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  @include themify {
+    color: $color-4;
+  }
+}
+
+.control {
+  cursor: pointer;
+  @include centering-flex;
+  justify-content: space-around;
+  border-radius: 50px;
+  height: 30px;
+  width: 100px;
+  @include themify {
+    background: $color-2;
+    box-shadow: 0 0 5px 3px $color-4;
+  }
+  & > svg {
+    &[status="pinned"] {
+      @include themify {
+        fill: $color-3;
+      }
+      transition: 0.4s ease all;
+      transform: rotate(135deg);
+      margin-top: 3px;
+    }
+  }
+}
+
+.control:not(:last-child) {
+  margin-right: 5px;
+}
+
+.shortControl {
+  width: 30px;
+}
+
+.icon {
+  @include themify {
+    fill: $color-4;
+  }
+  transition: 0.4s ease all;
+  min-width: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  min-height: 20px;
+}
+
+.hoverActive {
+  transition: 0.1s ease all;
+  &:hover {
+    transition: 0.1s ease all;
+    @include themify {
+      fill: $color-3;
+      color: $color-3;
+    }
+  }
+}
