@@ -2,10 +2,12 @@ import { TMemo } from "../../types";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { DEFAULT_MEMOCARD } from "./useMemoCard";
 
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 import { noop } from "../utils/noop";
 import omit from "lodash/omit";
 import { currentDate } from "../utils/currentDate";
+import { useHistory, useLocation } from "react-router";
+import { getMemoCardById } from "./service";
 
 type TMemoCardsContext = {
   memoCards: TMemo[];
@@ -33,17 +35,29 @@ export const MemoCardsContextProvider: React.FC = ({ children }) => {
 
   const [memoCards, setMemoCards] = useState<TMemo[]>(memoCardsParsed);
 
+  const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    const currentMemoCardId = location.pathname.replace("/memo/", "");
+    if (uuidValidate(currentMemoCardId)) {
+      setActiveMemoCard(getMemoCardById(currentMemoCardId, memoCards) || null);
+    }
+  }, [memoCards, location.pathname]);
+
   const [activeMemoCard, setActiveMemoCard] = useState<TMemo | null>(null);
   const addMemoCard = () => {
+    const newId = uuidv4();
     const dateNow = currentDate();
     const newMemoCard = {
       ...omit(DEFAULT_MEMOCARD, ["id", "createdTs", "modifiedTime"]),
-      id: uuidv4(),
+      id: newId,
       createdTs: dateNow,
       modifiedTime: new Date().getTime(),
     };
     setMemoCards(memoCards.concat([newMemoCard]));
     setActiveMemoCard(newMemoCard);
+    history.push(`/memo/${newId}`);
   };
 
   const updateMemoCard = (memoCard: TMemo) => {
@@ -57,6 +71,7 @@ export const MemoCardsContextProvider: React.FC = ({ children }) => {
           : e
       )
     );
+    setActiveMemoCard(memoCard);
   };
 
   const value = {
