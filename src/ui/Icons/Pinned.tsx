@@ -1,6 +1,8 @@
 import React, { SVGProps } from "react";
 
-type PinnedProps = Omit<SVGProps<SVGSVGElement>, "viewBox">;
+type PinnedProps = Omit<SVGProps<SVGSVGElement>, "viewBox"> & {
+  status?: string;
+};
 
 export const Pinned: React.FC<PinnedProps> = (props) => (
   <svg viewBox="0 0 512 512" {...props}>
