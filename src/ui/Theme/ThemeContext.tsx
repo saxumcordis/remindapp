@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export type Theme = "dark" | "light";
 
@@ -13,12 +13,18 @@ export const ThemeContext = createContext<ThemeContextValue>({
 });
 
 export const ThemeProvider: React.FC = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const initialValue =
+    JSON.parse(localStorage.getItem("REMIND_APP_THEME_MODE") || "0") || "dark";
+  const [theme, setTheme] = useState<Theme>(initialValue);
 
   const value = {
     theme,
     setTheme,
   };
+
+  useEffect(() => {
+    localStorage.setItem("REMIND_APP_THEME_MODE", JSON.stringify(theme));
+  }, [theme]);
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
