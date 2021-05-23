@@ -11,6 +11,7 @@ import {
 } from "./service/memoCards/useMemoCards";
 import { Controls } from "./components/Controls";
 import { FilteringContextProvider } from "./service/memoCards/useFiltering";
+import { MemoCardContextProvider } from "./service/memoCards/useMemoCard";
 
 const App = () => {
   return (
@@ -26,7 +27,14 @@ const App = () => {
               </MemoCardsContextProvider>
             </FilteringContextProvider>
           </Route>
-          <Route path="/memo/:id" component={MemoPage} />
+          <Route path="/memo/:id">
+            <MemoCardsContextProvider>
+              <MemoCardContextProvider>
+                <MemoPage />
+                <PersistMemoCards />
+              </MemoCardContextProvider>
+            </MemoCardsContextProvider>
+          </Route>
           <Route component={NotFound} />
         </Switch>
       </Container>
