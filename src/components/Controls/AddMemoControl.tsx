@@ -21,7 +21,7 @@ export const AddMemoControl: React.FC = () => {
       <span className={styles.hiddenText}>+</span>
       {isHovered && (
         <span onClick={addMemoCard} className={styles.addText}>
-          Add memo
+          New memo
         </span>
       )}
     </button>
