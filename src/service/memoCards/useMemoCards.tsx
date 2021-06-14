@@ -5,7 +5,7 @@ import { DEFAULT_MEMOCARD } from "./useMemoCard";
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 import { noop } from "../utils/noop";
 import omit from "lodash/omit";
-import { currentDate } from "../utils/currentDate";
+import { getStringDate } from "../utils/getStringDate";
 import { useHistory, useLocation } from "react-router";
 import { getMemoCardById } from "./service";
 
@@ -48,7 +48,7 @@ export const MemoCardsContextProvider: React.FC = ({ children }) => {
   const [activeMemoCard, setActiveMemoCard] = useState<TMemo | null>(null);
   const addMemoCard = () => {
     const newId = uuidv4();
-    const dateNow = currentDate();
+    const dateNow = getStringDate();
     const newMemoCard = {
       ...omit(DEFAULT_MEMOCARD, ["id", "createdTs", "modifiedTime"]),
       id: newId,
@@ -57,7 +57,7 @@ export const MemoCardsContextProvider: React.FC = ({ children }) => {
     };
     setMemoCards(memoCards.concat([newMemoCard]));
     setActiveMemoCard(newMemoCard);
-    history.push(`/memo/${newId}`);
+    setTimeout(() => history.push(`/memo/${newId}`));
   };
 
   const updateMemoCard = (memoCard: TMemo) => {
