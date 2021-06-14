@@ -45,7 +45,7 @@
 
   .date {
     position: absolute;
-    bottom: -1px;
+    bottom: -3px;
     left: 0;
     font-size: 9px;
     padding-left: 0.5rem;
@@ -86,24 +86,6 @@
   }
   @include themify {
     fill: $color-4;
-  }
-
-  svg[priority="Critical"] {
-    @include themify {
-      fill: $color-critical;
-    }
-  }
-
-  svg[priority="Major"] {
-    @include themify {
-      fill: $color-major;
-    }
-  }
-
-  svg[priority="Low"] {
-    @include themify {
-      fill: $color-low;
-    }
   }
 
   svg[deadline="deadline_true"] {

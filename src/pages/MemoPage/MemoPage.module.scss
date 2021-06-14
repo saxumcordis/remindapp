@@ -11,11 +11,30 @@
 .info {
   display: flex;
   flex-direction: column;
+  padding-top: 1rem;
+  font-size: 13px;
+  flex-basis: 40%;
+
+  &Grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 }
 
-.date {
+.withIcon {
+  padding: 2px 0 0 5px;
+  display: flex;
+  @media (max-width: 768px) {
+    font-size: 5px;
+  }
+  align-items: center;
   & > svg {
-    margin-right: 5px;
+    margin-right: 9px;
   }
 }
 
@@ -29,6 +48,7 @@
 
   @media (max-width: 768px) {
     @include text-overflow(200px);
+    font-size: 10px;
   }
 }
 
@@ -41,34 +61,47 @@
 }
 
 .control {
+  margin: 5px;
   cursor: pointer;
   @include centering-flex;
   justify-content: space-around;
+  @media (max-width: 768px) {
+    font-size: 0;
+    height: 15px;
+    max-width: 15px;
+    justify-content: center;
+    box-shadow: 0 0 3px 1px !important;
+  }
   border-radius: 50px;
   height: 30px;
-  width: 100px;
   @include themify {
     background: $color-2;
     box-shadow: 0 0 5px 3px $color-4;
   }
   & > svg {
-    &[status="pinned"] {
+    &[status="active"] {
       @include themify {
         fill: $color-3;
       }
+
+    }
+    &[status="activePin"] {
       transition: 0.4s ease all;
       transform: rotate(135deg);
       margin-top: 3px;
+      @include themify {
+        fill: $color-3;
+      }
     }
   }
 }
 
-.control:not(:last-child) {
-  margin-right: 5px;
-}
-
 .shortControl {
   width: 30px;
+  justify-content: center !important;
+  @media (max-width: 768px) {
+    width: 15px;
+  }
 }
 
 .icon {
@@ -80,6 +113,12 @@
   max-width: 20px;
   max-height: 20px;
   min-height: 20px;
+  @media (max-width: 768px) {
+    min-width: 8px;
+    max-width: 8px;
+    max-height: 8px;
+    min-height: 8px;
+  }
 }
 
 .hoverActive {

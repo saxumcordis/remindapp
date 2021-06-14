@@ -23,7 +23,7 @@ button {
 * {
   box-sizing: border-box;
   border: 0;
-  outline: none;
+  outline: transparent;
   transition-timing-function: linear;
   transition-duration: 80ms;
   transition-property: color, background-color, fill;

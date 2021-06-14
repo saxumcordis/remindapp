@@ -19,9 +19,17 @@
   @include centering-flex;
   height: 50px;
   width: 100%;
+  & > * {
+    width: 100px;
+  }
   @include themify {
     border-bottom: 1px solid $color-1;
     box-shadow: 0 0 5px $color-1;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 9px;
+    height: 25px;
   }
 }
 
@@ -29,7 +37,7 @@
   padding: 1rem 3rem;
   width: 100%;
   @media (max-width: 768px) {
-    padding: 1rem;
+    padding: 0.5rem;
   }
 }
 
@@ -40,5 +48,10 @@
   transition: 0.4s all;
   @include themify {
     fill: $color-4;
+  }
+  @media (max-width: 768px) {
+    max-width: 18px;
+    max-height: 18px;
+    min-width: 18px;
   }
 }
