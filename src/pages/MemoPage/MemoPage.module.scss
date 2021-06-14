@@ -1,17 +1,24 @@
 @import "../../ui/Theme/theme";
 @import "../../assets/style/mixins/_typography.scss";
 
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
   display: flex;
-  height: 50px;
-  align-items: center;
   justify-content: space-between;
+  height: 120px;
+
+  @media (max-width: 768px) {
+    height: 60px;
+  }
 }
 
 .info {
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
   font-size: 13px;
   flex-basis: 40%;
 
@@ -54,10 +61,11 @@
 
 .controls {
   display: flex;
-  align-items: center;
+  padding-top: 0.5rem;
   @include themify {
     color: $color-4;
   }
+  transition: 0.4s ease all;
 }
 
 .control {
@@ -83,7 +91,6 @@
       @include themify {
         fill: $color-3;
       }
-
     }
     &[status="activePin"] {
       transition: 0.4s ease all;
@@ -129,5 +136,17 @@
       fill: $color-3;
       color: $color-3;
     }
+  }
+}
+
+.disabled {
+  transition: 0.4s ease;
+  opacity: 0.5;
+  cursor: default;
+  @include themify {
+    & > svg {
+      fill: $color-3;
+    }
+    color: $color-3;
   }
 }
