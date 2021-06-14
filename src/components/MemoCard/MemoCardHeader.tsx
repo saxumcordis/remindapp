@@ -2,7 +2,6 @@ import React from "react";
 import { EMemoPriority } from "../../types";
 import { Input } from "../Input";
 
-import styles from "./MemoCard.module.scss";
 import { useMemoCard } from "../../service/memoCards/useMemoCard";
 import { useMemoCards } from "../../service/memoCards/useMemoCards";
 import { Pinned } from "../../ui/Icons/Pinned";
@@ -10,6 +9,9 @@ import { Deadline } from "../../ui/Icons/Deadline";
 import { Priority } from "../../ui/Icons/Priority";
 import { DateSort } from "../../ui/Icons/DateSort";
 import { EMemoPriorityNames } from "../../service/memoCards/service";
+
+import styles from "./MemoCard.module.scss";
+import priorityTheme from "../../ui/Priority/Priority.module.scss";
 
 type MemoCardHeaderProps = {
   id: string;
@@ -59,7 +61,10 @@ export const MemoCardHeader: React.FC<MemoCardHeaderProps> = ({
           e.stopPropagation();
         }}
       >
-        <Priority priority={EMemoPriorityNames[priority]} />
+        <Priority
+          className={priorityTheme.themify}
+          priority={EMemoPriorityNames[priority]}
+        />
         <Deadline deadline={`deadline_${Boolean(deadline)}`} />
         <Pinned
           className={pinned ? styles.pinned : ""}

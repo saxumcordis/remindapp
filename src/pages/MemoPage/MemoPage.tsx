@@ -3,27 +3,26 @@ import React from "react";
 import { useMemoCards } from "../../service/memoCards/useMemoCards";
 import { NotFound } from "../../components/NotFound";
 
-import styles from "./MemoPage.module.scss";
-import { Input } from "../../components/Input";
+import { MemoPageInfo } from "./MemoPageInfo";
 import { useMemoCard } from "../../service/memoCards/useMemoCard";
 import { Pinned } from "../../ui/Icons/Pinned";
-import { DateSort } from "../../ui/Icons/DateSort";
 import { Back } from "../../ui/Icons/Back";
 import classNames from "classnames";
 import { useHistory } from "react-router";
+import { Priority } from "../../ui/Icons/Priority";
+import { EMemoPriorityNames } from "../../service/memoCards/service";
+
+import styles from "./MemoPage.module.scss";
+import { MemoCardDeadline } from "../../components/MemoCard/MemoCardDeadline";
 
 export const MemoPage: React.FC = () => {
   const { activeMemoCard } = useMemoCards();
 
-  const { renameMemoCard, pinMemoCard } = useMemoCard();
+  const { pinMemoCard } = useMemoCard();
 
   const history = useHistory();
 
   if (!activeMemoCard) return <NotFound />;
-
-  const handleNewName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    renameMemoCard(e.target.value);
-  };
 
   const handlePinMemoCard = () => {
     pinMemoCard(!activeMemoCard.pinned, activeMemoCard.id);
@@ -33,38 +32,43 @@ export const MemoPage: React.FC = () => {
     history.push("/");
   };
 
+  const priority = EMemoPriorityNames[activeMemoCard.priority];
+
   return (
-    <div>
-      <div className={styles.header}>
-        <div className={styles.info}>
-          <Input
-            className={styles.title}
-            defaultValue={activeMemoCard.title}
-            onChange={handleNewName}
+    <div className={styles.header}>
+      <MemoPageInfo
+        title={activeMemoCard.title}
+        createdTs={activeMemoCard.createdTs}
+        modifiedTime={activeMemoCard.modifiedTime}
+        priority={priority}
+        deadline={activeMemoCard.deadline}
+      />
+      <div className={styles.controls}>
+        <MemoCardDeadline deadline={activeMemoCard.deadline} />
+        <span
+          style={{ width: "120px", opacity: 0.5 }}
+          className={classNames(styles.control, styles.hoverActive)}
+        >
+          <Priority className={styles.icon} priority={priority} />
+          Set priority
+        </span>
+        <span
+          style={{ width: "80px" }}
+          className={classNames(styles.control, styles.hoverActive)}
+          onClick={handlePinMemoCard}
+        >
+          <Pinned
+            className={styles.icon}
+            status={activeMemoCard.pinned ? "activePin" : ""}
           />
-          <span className={styles.date}>
-            <DateSort className={styles.icon} />
-            {activeMemoCard.createdTs}
-          </span>
-        </div>
-        <div className={styles.controls}>
-          <span
-            className={classNames(styles.control, styles.hoverActive)}
-            onClick={handlePinMemoCard}
-          >
-            <Pinned
-              className={styles.icon}
-              status={activeMemoCard.pinned ? "pinned" : ""}
-            />
-            {!activeMemoCard.pinned ? "Pin" : "Unpin"}
-          </span>
-          <span
-            className={classNames(styles.control, styles.shortControl)}
-            onClick={handleReturn}
-          >
-            <Back className={classNames(styles.icon, styles.hoverActive)} />
-          </span>
-        </div>
+          {!activeMemoCard.pinned ? "Pin" : "Unpin"}
+        </span>
+        <span
+          className={classNames(styles.control, styles.shortControl)}
+          onClick={handleReturn}
+        >
+          <Back className={classNames(styles.icon, styles.hoverActive)} />
+        </span>
       </div>
     </div>
   );
