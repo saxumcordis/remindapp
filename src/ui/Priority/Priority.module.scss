@@ -1,0 +1,21 @@
+@import "../Theme/theme";
+
+.themify {
+  &[priority="Critical"] {
+    @include themify {
+      fill: $color-critical;
+    }
+  }
+
+  &[priority="Major"] {
+    @include themify {
+      fill: $color-major;
+    }
+  }
+
+  &[priority="Low"] {
+    @include themify {
+      fill: $color-low;
+    }
+  }
+}
