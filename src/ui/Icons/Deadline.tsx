@@ -1,6 +1,7 @@
 import React, { SVGProps } from "react";
 
 type DeadlineProps = Omit<SVGProps<SVGSVGElement>, "viewBox"> & {
+  status?: string;
   deadline?: string;
 };
 
