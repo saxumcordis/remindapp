@@ -96,11 +96,12 @@
 }
 
 .content {
-  padding: 0 1rem 10px 1rem;
+  padding: 0.5rem 1rem 10px 1rem;
   display: flex;
+  flex-direction: column;
   word-break: break-all;
   &Overflow {
-    padding: 0 1rem 10px 1rem;
+    padding: 0.5rem 1rem 10px 1rem;
     @include text-overflow(100px);
   }
 }
