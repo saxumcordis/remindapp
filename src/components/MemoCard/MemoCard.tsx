@@ -20,7 +20,7 @@ type MemoCardProps = {
 
 const MAX_CONTENT_LENGTH = 6;
 
-const MAX_LIST_CONTENT_LENGTH = 1;
+const MAX_LIST_CONTENT_LENGTH = 2;
 
 export const defaultContentListItem = {
   text: "",
@@ -71,14 +71,18 @@ export const MemoCard: React.FC<MemoCardProps> = ({ memoCard }) => {
             deadline={memoCard.deadline}
             priority={memoCard.priority}
           />
-          <MemoCardContent content={memoCard.content} expanded={expanded} />
+          <MemoCardContent
+            content={memoCard.content}
+            expanded={expanded}
+            id={memoCard.id}
+          />
           {shouldShowExpander && (
             <div
               className={classNames(styles.footer, {
                 [styles.rotated]: expanded,
               })}
             >
-              {isHovered && (
+              {(isHovered || isListContent) && (
                 <span
                   onClick={(e) => {
                     e.preventDefault();
