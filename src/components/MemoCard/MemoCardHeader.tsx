@@ -3,7 +3,6 @@ import { EMemoPriority } from "../../types";
 import { Input } from "../Input";
 
 import { useMemoCard } from "../../service/memoCards/useMemoCard";
-import { useMemoCards } from "../../service/memoCards/useMemoCards";
 import { Pinned } from "../../ui/Icons/Pinned";
 import { Deadline } from "../../ui/Icons/Deadline";
 import { Priority } from "../../ui/Icons/Priority";
@@ -12,6 +11,7 @@ import { EMemoPriorityNames } from "../../service/memoCards/service";
 
 import styles from "./MemoCard.module.scss";
 import priorityTheme from "../../ui/Priority/Priority.module.scss";
+import { useMedia } from "use-media";
 
 type MemoCardHeaderProps = {
   id: string;
@@ -30,8 +30,10 @@ export const MemoCardHeader: React.FC<MemoCardHeaderProps> = ({
   deadline,
   priority,
 }) => {
-  const { activeMemoCard } = useMemoCards();
   const { renameMemoCard, pinMemoCard } = useMemoCard();
+
+  const isWide = useMedia({ minWidth: "768px" });
+
   const handleNewName = (e: React.ChangeEvent<HTMLInputElement>) => {
     renameMemoCard(e.target.value);
   };
@@ -43,10 +45,10 @@ export const MemoCardHeader: React.FC<MemoCardHeaderProps> = ({
     <div className={styles.header}>
       <div className={styles.title}>
         <Input
-          onClick={(e) => e.preventDefault()}
-          autoFocus={activeMemoCard?.id === id}
+          onClick={(e) => isWide && e.preventDefault()}
           className={styles.inputTitle}
           defaultValue={title}
+          placeholder="unnamed memo"
           onChange={handleNewName}
         />
         <span className={styles.date}>
