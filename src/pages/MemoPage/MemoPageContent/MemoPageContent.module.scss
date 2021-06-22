@@ -1,0 +1,103 @@
+@import "../../../ui/Theme/theme";
+@import "../../../assets/style/mixins/_typography.scss";
+
+.contentField {
+  width: 100%;
+  height: 50vh;
+  border-radius: 5px;
+  @include themify {
+    border-top: 1px solid $color-2;
+    border-bottom: 1px solid $color-2;
+  }
+  overflow: scroll;
+  padding: 5px;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    height: 50vh;
+  }
+}
+
+.textArea {
+  resize: none;
+  background: transparent;
+  @include themify {
+    color: $color-3;
+  }
+  width: 100%;
+  height: 50vh;
+
+  @media (max-width: 768px) {
+    font-size: 10px;
+    height: 200px;
+  }
+}
+
+.listItem {
+  position: relative;
+  display: flex;
+  height: 32px;
+  align-items:  center;
+  border-radius: 10px;
+  &:first-child {
+    margin-top: 15px;
+  }
+  margin-bottom: 15px;
+  &Input {
+    width: 95%;
+    padding: 0 5px 0 5px;
+
+    @include themify {
+      color: $color-3;
+    }
+  }
+  @include themify {
+    box-shadow: 0 3px 10px rgba($color-major, 0.5);
+  }
+  @media (max-width: 768px) {
+    height: 16px;
+
+    &Input {
+      font-size: 8px;
+      width: 90%;
+    }
+
+    &:first-child {
+      margin-top: 5px;
+    }
+    margin-bottom: 5px;
+    box-shadow: 0 2px 5px rgba($color-major, 0.5) !important;
+  }
+}
+
+.checkbox {
+  opacity: 0;
+  transition: 0.1s ease;
+  @media (max-width: 768px) {
+    max-width: 10px;
+    max-height: 10px;
+  }
+  &:hover {
+    opacity: 1;
+    transition: 0.1s ease;
+  }
+}
+
+.checked {
+  transition: 0.4s ease all;
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.delete {
+  width: 14px;
+  height: 14px;
+  @include themify {
+    fill: $color-2;
+  }
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    width: 8px;
+    height: 8px;
+  }
+}
