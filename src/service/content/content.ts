@@ -56,7 +56,10 @@ export const listContentFromString = (content?: string): TContentList => {
 
 export const stringContentFromList = (content?: TContentList): string => {
   if (!content?.length) return "";
-  return content.map((e) => e.text).join("\n");
+  return content
+    .map((e) => (e.text || "").replace("\n", ""))
+    .filter((e) => e)
+    .join("\n");
 };
 
 export const switchContent = (newType: EContent, content?: TContent) => {
