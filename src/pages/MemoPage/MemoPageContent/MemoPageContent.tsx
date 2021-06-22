@@ -16,39 +16,48 @@ import {
 import { Input } from "../../../components/Input";
 import { Checkbox } from "../../../components/Checkbox";
 import classNames from "classnames";
-import {Cross} from "../../../ui/Icons/Cross";
-import {useOnEnter} from "../../../service/content/useOnEnter";
-import {defaultContentListItem} from "../../../components/MemoCard/MemoCard";
+import { Cross } from "../../../ui/Icons/Cross";
+import { useOnEnter } from "../../../service/content/useOnEnter";
+import { defaultContentListItem } from "../../../components/MemoCard/MemoCard";
 
 type Props = {
   content?: TContent;
   id: string;
 };
 
-const ContentListItem: React.FC<TContentListItem & { index: number, id: string }> = ({
-    id,
-  text,
-  checked,
-  index,
-}) => {
-  const {saveContentItem, deleteContentItem, lastItemId, setLastItemId, addContentItem} = useMemoCard();
+export const ContentListItem: React.FC<
+  TContentListItem & { index: number; id: string; readOnly?: boolean }
+> = ({ id, text, checked, index, readOnly = false }) => {
+  const {
+    saveContentItem,
+    deleteContentItem,
+    lastItemId,
+    setLastItemId,
+    addContentItem,
+  } = useMemoCard();
 
   const checkboxRef = createRef<HTMLInputElement>();
 
   const handleCheck = useCallback(() => {
-    saveContentItem({text, checked: checkboxRef?.current?.checked || false}, index, id)
+    saveContentItem(
+      { text, checked: checkboxRef?.current?.checked || false },
+      index,
+      id
+    );
   }, [saveContentItem, text, checkboxRef, index, id]);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value)
-    saveContentItem({text: e.target.value, checked}, index, id)
-  }
+      saveContentItem({ text: e.target.value, checked }, index, id);
+  };
 
-  const onEnter = useOnEnter(() => addContentItem(defaultContentListItem, index, id))
+  const onEnter = useOnEnter(() =>
+    addContentItem(defaultContentListItem, index, id)
+  );
 
   return (
     <div className={styles.listItem}>
-      {Boolean(text) && (
+      {Boolean(text) && !readOnly && (
         <Checkbox
           className={styles.checkbox}
           ref={checkboxRef}
@@ -65,9 +74,15 @@ const ContentListItem: React.FC<TContentListItem & { index: number, id: string }
         autoFocus={lastItemId === index}
         onKeyDown={onEnter}
         onFocus={() => setLastItemId(index)}
-        placeholder={'Write your memo here to not forget'}
+        placeholder={"Write your memo here to not forget"}
+        readOnly={readOnly}
       />
-      {Boolean(text) && <Cross className={styles.delete} onClick={() => deleteContentItem(index, id)} />}
+      {Boolean(text) && !readOnly && (
+        <Cross
+          className={styles.delete}
+          onClick={() => deleteContentItem(index, id)}
+        />
+      )}
     </div>
   );
 };
@@ -103,7 +118,7 @@ export const MemoPageContent: React.FC<Props> = ({ content, id }) => {
         className={styles.textArea}
         defaultValue={content as string}
         onChange={handleContentTextChange}
-        placeholder={'Write your memo here to not forget'}
+        placeholder={"Write your memo here to not forget"}
       />
     </div>
   );
