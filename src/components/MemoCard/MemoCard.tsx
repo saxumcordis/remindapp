@@ -22,6 +22,11 @@ const MAX_CONTENT_LENGTH = 6;
 
 const MAX_LIST_CONTENT_LENGTH = 1;
 
+export const defaultContentListItem = {
+  text: "",
+  checked: false,
+};
+
 export const MemoCard: React.FC<MemoCardProps> = ({ memoCard }) => {
   const { setActiveMemoCard } = useMemoCards();
 
@@ -73,7 +78,16 @@ export const MemoCard: React.FC<MemoCardProps> = ({ memoCard }) => {
                 [styles.rotated]: expanded,
               })}
             >
-              {isHovered && <span onClick={handleExpanded}>▼</span>}
+              {isHovered && (
+                <span
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleExpanded();
+                  }}
+                >
+                  ▼
+                </span>
+              )}
             </div>
           )}
         </div>
