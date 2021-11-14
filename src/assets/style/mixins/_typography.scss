@@ -3,3 +3,10 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin text-overflow($max-width) {
+  max-width: $max-width;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

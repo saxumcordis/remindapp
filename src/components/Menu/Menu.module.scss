@@ -1,7 +1,9 @@
 @import "../../ui/Theme/theme";
 
 .container {
-  position: relative;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
   display: flex;
   width: 30px;
   height: 30px;
@@ -21,6 +23,18 @@
     width: 100px;
     border-radius: 50px;
     transition: 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    height: 15px;
+    width: 15px;
+    font-size: 6px;
+    line-height: 15px;
+    box-shadow: 0 0 3px 1px !important;
+
+    &Hovered {
+      width: 50px;
+    }
   }
 }
 

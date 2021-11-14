@@ -1,0 +1,22 @@
+.dashboard {
+  display: flex;
+  overflow: auto;
+  &:not(:last-child) {
+    max-height: 30vh;
+  }
+  &:last-child {
+    max-height: 40vh;
+  }
+}
+
+.column {
+  padding: 10px 7px 10px 7px;
+  min-width: 200px;
+  &:not(:first-child) {
+    padding-left: 30px;
+  }
+  & > a {
+    display: inline-block;
+    padding-bottom: 10px;
+  }
+}

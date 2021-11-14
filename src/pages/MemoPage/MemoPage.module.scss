@@ -1,0 +1,152 @@
+@import "../../ui/Theme/theme";
+@import "../../assets/style/mixins/_typography.scss";
+
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 120px;
+
+  @media (max-width: 768px) {
+    height: 60px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  flex-basis: 40%;
+
+  &Grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0;
+  }
+}
+
+.withIcon {
+  padding: 2px 0 0 5px;
+  display: flex;
+  @media (max-width: 768px) {
+    font-size: 5px;
+  }
+  align-items: center;
+  & > svg {
+    margin-right: 9px;
+  }
+}
+
+.title {
+  cursor: pointer;
+  font-size: 20px;
+  @include text-overflow(600px);
+  @include themify {
+    color: $color-3;
+  }
+
+  @media (max-width: 768px) {
+    @include text-overflow(200px);
+    font-size: 10px;
+  }
+}
+
+.controls {
+  display: flex;
+  padding-top: 0.5rem;
+  @include themify {
+    color: $color-4;
+  }
+  transition: 0.4s ease all;
+}
+
+.control {
+  margin: 5px;
+  cursor: pointer;
+  @include centering-flex;
+  justify-content: space-around;
+  @media (max-width: 768px) {
+    font-size: 0;
+    height: 15px;
+    max-width: 15px;
+    justify-content: center;
+    box-shadow: 0 0 3px 1px !important;
+  }
+  border-radius: 50px;
+  height: 30px;
+  @include themify {
+    background: $color-2;
+    box-shadow: 0 0 5px 3px $color-4;
+  }
+  & > svg {
+    &[status="active"] {
+      @include themify {
+        fill: $color-3;
+      }
+    }
+    &[status="activePin"] {
+      transition: 0.4s ease all;
+      transform: rotate(135deg);
+      margin-top: 3px;
+      @include themify {
+        fill: $color-3;
+      }
+    }
+  }
+}
+
+.shortControl {
+  width: 30px;
+  justify-content: center !important;
+  @media (max-width: 768px) {
+    width: 15px;
+  }
+}
+
+.icon {
+  @include themify {
+    fill: $color-4;
+  }
+  transition: 0.4s ease all;
+  min-width: 20px;
+  max-width: 20px;
+  max-height: 20px;
+  min-height: 20px;
+  @media (max-width: 768px) {
+    min-width: 8px;
+    max-width: 8px;
+    max-height: 8px;
+    min-height: 8px;
+  }
+}
+
+.hoverActive {
+  transition: 0.1s ease all;
+  &:hover {
+    transition: 0.1s ease all;
+    @include themify {
+      fill: $color-3;
+      color: $color-3;
+    }
+  }
+}
+
+.disabled {
+  transition: 0.4s ease;
+  opacity: 0.5;
+  cursor: default;
+  @include themify {
+    & > svg {
+      fill: $color-3;
+    }
+    color: $color-3;
+  }
+}

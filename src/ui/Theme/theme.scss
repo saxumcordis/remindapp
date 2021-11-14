@@ -3,21 +3,24 @@ $color-1: null;
 $color-2: null;
 $color-3: null;
 $color-4: null;
+$color-critical: #c81111;
+$color-major: #b40bbe;
+$color-low: #63d297;
 
 $themes: (
   light: (
     color-0: #fff,
     color-1: #63d297,
     color-2: #202729,
-    color-3: #FF5252,
+    color-3: #ff5252,
     color-4: #999999,
   ),
   dark: (
-          color-0: #202729,
-          color-1: #63d297,
-          color-2: #4BA173,
-          color-3: #FFF076,
-          color-4: #fff,
+    color-0: #202729,
+    color-1: #63d297,
+    color-2: #4ba173,
+    color-3: #fff076,
+    color-4: #fff,
   ),
 );
 
