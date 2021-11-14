@@ -8,7 +8,7 @@ import { UpdateDateSort } from "../../ui/Icons/UpdateDateSort";
 import { getStringDate } from "../../service/utils/getStringDate";
 import React from "react";
 import { useMemoCard } from "../../service/memoCards/useMemoCard";
-import {Deadline} from "../../ui/Icons/Deadline";
+import { Deadline } from "../../ui/Icons/Deadline";
 
 type TMemoPageHeader = {
   title?: string;
@@ -32,33 +32,34 @@ export const MemoPageInfo: React.FC<TMemoPageHeader> = ({
   };
 
   return (
-      <div className={styles.info}>
-        <Input
-          className={styles.title}
-          defaultValue={title}
-          onChange={handleNewName}
-        />
-        <div className={styles.infoGrid}>
-          <span className={styles.withIcon} title="Creation date">
-            <DateSort className={styles.icon} />
-            {createdTs}
-          </span>
-          <span className={styles.withIcon}>
-            <Priority
-              className={classNames(styles.icon, priorityTheme.themify)}
-              priority={priority}
-            />
-            <span>Priority: {priority}</span>
-          </span>
-          <span className={styles.withIcon} title="Update date">
-            <UpdateDateSort className={styles.icon} />
-            {getStringDate(modifiedTime)}
-          </span>
-          <span className={styles.withIcon} title="Update date">
-            <Deadline className={styles.icon} status={deadline} />
-            Deadline: {deadline ?? 'not set'}
-          </span>
-        </div>
+    <div className={styles.info}>
+      <Input
+        className={styles.title}
+        defaultValue={title}
+        placeholder={"unnamed memo"}
+        onChange={handleNewName}
+      />
+      <div className={styles.infoGrid}>
+        <span className={styles.withIcon} title="Creation date">
+          <DateSort className={styles.icon} />
+          {createdTs}
+        </span>
+        <span className={styles.withIcon}>
+          <Priority
+            className={classNames(styles.icon, priorityTheme.themify)}
+            priority={priority}
+          />
+          <span>Priority: {priority}</span>
+        </span>
+        <span className={styles.withIcon} title="Update date">
+          <UpdateDateSort className={styles.icon} />
+          {getStringDate(modifiedTime)}
+        </span>
+        <span className={styles.withIcon} title="Update date">
+          <Deadline className={styles.icon} status={deadline} />
+          Deadline: {deadline ?? "not set"}
+        </span>
       </div>
+    </div>
   );
 };

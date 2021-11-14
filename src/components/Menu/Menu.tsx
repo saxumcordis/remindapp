@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
 
-import styles from "./Menu.module.scss";
 import classNames from "classnames";
 import { OpenedMenu } from "./OpenedMenu";
 import { useHover } from "../../service/hooks/useHover";
+
+import styles from "./Menu.module.scss";
 
 export const Menu: React.FC = () => {
   const hoverRef = useRef(null);

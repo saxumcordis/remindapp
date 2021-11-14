@@ -1,1 +1,1 @@
-export {MemoPage} from './MemoPage';
+export { MemoPage } from "./MemoPage";
